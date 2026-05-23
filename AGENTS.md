@@ -138,3 +138,16 @@ init
 - `tra_dyn.m`、`rot_dyn.m` 中存在硬编码质量/惯量；如果做变质量或参数化仿真，应优先使用变质量模型或配置结构体。
 - 气动模型注释提到部分马赫数分段点通过线性过渡保持连续，且大攻角/高马赫下参数可靠性有限。
 - 当前未发现自动化测试；验证通常需要 MATLAB/Simulink 打开模型并运行仿真。
+
+## 代码提交与远程仓库协作
+
+- 当前项目使用 Git 做版本管理，本地仓库根目录是 `D:\Work\codex\codex-flightcontrol`。
+- 当前远程仓库使用 GitHub：`https://github.com/Lemonray913/codex-flightcontrol.git`。
+- MATLAB 的源代码管理面板、MATLAB Git API、Codex 中的 Git 命令都操作同一个 `.git` 仓库；任一端提交后，另一端通过 `git status`、`git log` 或刷新 MATLAB 项目即可看到最新状态。
+- 如果用户在 MATLAB 中手动提交，Codex 不会自动实时感知；需要先读取 Git 状态和提交历史，例如 `git status --short --branch`、`git log --oneline -5`。
+- 如果 Codex 修改代码并需要提交，先检查工作区状态，只提交本次任务相关文件，避免把用户在 MATLAB 中尚未说明的改动混入同一次提交。
+- 不要让 MATLAB 和 Codex 同时执行提交、推送、拉取、合并、切分支或回滚；一端操作完成后，另一端先刷新/检查状态再继续。
+- 提交信息使用简短明确的英文或中文均可，建议一类改动一次提交，例如 `Update project agent notes` 或 `补充Git协作说明`。
+- 推送前确认远程地址和分支：`git remote -v`、`git status --short --branch`。
+- 当前分支沿用现有仓库设置；如需把 `master` 改为 `main`，必须先和用户确认并同步 GitHub 默认分支设置。
+- `.slx`、`.docx`、`.pdf`、`.xlsx` 等二进制文件可以提交，但冲突通常难以自动合并；协作时避免多人同时修改同一个 Simulink 模型文件。

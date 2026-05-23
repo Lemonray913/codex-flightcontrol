@@ -11,6 +11,7 @@
  %}
 
 % 获取当前文件夹路径
+% testgit
 clear; %清空工作区
 currentFolder = pwd;
 
